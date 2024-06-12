@@ -1,0 +1,130 @@
+mock-movie.service.ts
+
+// mock-movie.service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MockMovieService {
+  private movies = [
+    { id: 1, title: 'Movie 1', year: 2020, genre: 'Action', plot: 'Lorem ipsum...' },
+    { id: 2, title: 'Movie 2', year: 2019, genre: 'Comedy', plot: 'Lorem ipsum...' },
+    { id: 3, title: 'Movie 3', year: 2018, genre: 'Drama', plot: 'Lorem ipsum...' }
+    // Add more mock movies as needed
+  ];
+
+  constructor() { }
+
+  getMovies() {
+    return this.movies;
+  }
+
+  getMovieById(id: number) {
+    return this.movies.find(movie => movie.id === id);
+  }
+
+  searchMovies(query: string) {
+    return this.movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase()));
+  }
+}
+
+
+
+// movie-list.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { MockMovieService } from '../mock-movie.service';
+
+@Component({
+  selector: 'app-movie-list',
+  templateUrl: './movie-list.component.html',
+  styleUrls: ['./movie-list.component.css']
+})
+export class MovieListComponent implements OnInit {
+  movies: any[];
+
+  constructor(private movieService: MockMovieService) { }
+
+  ngOnInit() {
+    this.movies = this.movieService.getMovies();
+  }
+}
+
+
+// movie-search.component.ts
+
+import { Component } from '@angular/core';
+import { MockMovieService } from '../mock-movie.service';
+
+@Component({
+  selector: 'app-movie-search',
+  templateUrl: './movie-search.component.html',
+  styleUrls: ['./movie-search.component.css']
+})
+export class MovieSearchComponent {
+  searchQuery: string;
+
+  constructor(private movieService: MockMovieService) { }
+
+  search() {
+    // Implement search functionality
+  }
+}
+
+
+
+<!-- movie-list.component.html -->
+
+<div *ngFor="let movie of movies">
+  <h3>{{ movie.title }}</h3>
+  <p>Year: {{ movie.year }}</p>
+  <p>Genre: {{ movie.genre }}</p>
+  <p>Plot: {{ movie.plot }}</p>
+</div>
+
+
+
+
+<!-- movie-search.component.html -->
+
+<input type="text" [(ngModel)]="searchQuery" placeholder="Search movies...">
+<button (click)="search()">Search</button>
+
+
+
+<!-- app.component.html -->
+
+<div>
+  <app-movie-search></app-movie-search>
+  <app-movie-list></app-movie-list>
+</div>
+
+
+
+// app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { MockMovieService } from './mock-movie.service';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MovieListComponent,
+    MovieSearchComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [MockMovieService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

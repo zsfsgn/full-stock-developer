@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive eCommerce Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+  /* Basic CSS for responsiveness */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .container {
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .product {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    width: 250px;
+  }
+  .product img {
+    width: 100%;
+    height: auto;
+  }
+  .product-details {
+    padding: 20px;
+  }
+  .product-details h2 {
+    margin-top: 0;
+  }
+  .product-details p {
+    margin-bottom: 10px;
+  }
+  .add-to-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+  .add-to-cart i {
+    font-size: 20px;
+  }
+  .cart-container {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  .cart-item {
+    margin-bottom: 10px;
+  }
+  .cart-item span {
+    margin-right: 10px;
+  }
+  .clear-cart {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  @media (min-width: 768px) {
+    .product {
+      width: 300px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Responsive eCommerce Page</h1>
+</header>
+
+<div class="container">
+  <div class="product">
+    <img src="https://via.placeholder.com/300" alt="Product">
+    <div class="product-details">
+      <h2>Product Name 1</h2>
+      <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Price: $19.99</p>
+    </div>
+    <div class="add-to-cart" onclick="addToCart('Product Name 1', 19.99)">
+      <span>Add to Cart</span>
+      <i class="fas fa-cart-plus"></i>
+    </div>
+  </div>
+
+  <div class="product">
+    <img src="https://via.placeholder.com/300" alt="Product">
+    <div class="product-details">
+      <h2>Product Name 2</h2>
+      <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Price: $24.99</p>
+    </div>
+    <div class="add-to-cart" onclick="addToCart('Product Name 2', 24.99)">
+      <span>Add to Cart</span>
+      <i class="fas fa-cart-plus"></i>
+    </div>
+  </div>
+
+  <!-- More product listings can be added here -->
+</div>
+
+<div class="cart-container">
+  <h2>Cart</h2>
+  <div id="cart-items"></div>
+  <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+</div>
+
+<footer>
+  <p>&copy; 2024 Responsive eCommerce Page. All Rights Reserved.</p>
+</footer>
+
+<script>
+  function addToCart(productName, price) {
+    let cartItemElement = document.createElement('div');
+    cartItemElement.classList.add('cart-item');
+    cartItemElement.innerHTML = `<span>${productName}</span><span>$${price}</span>`;
+    document.getElementById('cart-items').appendChild(cartItemElement);
+    alert('Item added to cart!');
+  }
+
+  function clearCart() {
+    document.getElementById('cart-items').innerHTML = '';
+  }
+</script>
+
+</body>
+</html>

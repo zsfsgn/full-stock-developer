@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Information</title>
+</head>
+<body>
+
+
+     Enter Pokémon Name or ID:
+    <input type="text" id="n1" placeholder="e.g., pikachu">
+    <button onclick="put()">Search</button>
+    <div id="n2"></div>
+
+    <script>
+        async function put() {
+            const a = document.getElementById('n1').value.toLowerCase();
+            const url = `https://pokeapi.co/api/v2/pokemon/${a}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (response.ok) {
+                    get(data);
+                } 
+
+            } catch (error) {
+                displayError('An error occurred while fetching Pokémon information. Please try again.');
+            }
+        }
+
+        function get(pokemon) {
+            const b = document.getElementById('n2');
+            b.innerHTML = `
+                <h2>${pokemon.name}</h2>
+                <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+                  `;
+        }
+
+        </script>
+</body>
+</html>

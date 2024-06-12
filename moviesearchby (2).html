@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Catalog</title>
+</head>
+<body>
+  <h1>Movie Catalog</h1>
+  <div id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search movies...">
+    <button id="searchButton" onclick="searchMovies()">Search</button>
+  </div>
+  <div id="movieList"></div>
+
+  <script>
+    const movies = [
+      { id: 1, title: 'Movie 1', year: 2020, genre: 'Action', plot: 'Lorem ipsum...' },
+      { id: 2, title: 'Movie 2', year: 2019, genre: 'Comedy', plot: 'Lorem ipsum...' },
+      { id: 3, title: 'Movie 3', year: 2018, genre: 'Drama', plot: 'Lorem ipsum...' }
+      // Add more mock movies as needed
+    ];
+
+    function displayMovies(movies) {
+      const movieList = document.getElementById('movieList');
+      movieList.innerHTML = '';
+      
+      movies.forEach(movie => {
+        const movieItem = document.createElement('div');
+        movieItem.classList.add('movieItem');
+        movieItem.innerHTML = `
+          <h3>${movie.title}</h3>
+          <p>Year: ${movie.year}</p>
+          <p>Genre: ${movie.genre}</p>
+          <p>Plot: ${movie.plot}</p>
+        `;
+        movieList.appendChild(movieItem);
+      });
+    }
+
+    function searchMovies() {
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const searchResults = movies.filter(movie => movie.title.toLowerCase().includes(searchQuery));
+      displayMovies(searchResults);
+    }
+
+    
+    // Initial display of all movies
+    window.onload = function() {
+      displayMovies(movies);
+    };
+  </script>
+</body>
+</html>

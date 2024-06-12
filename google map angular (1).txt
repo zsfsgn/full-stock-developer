@@ -1,0 +1,40 @@
+npm install @agm/core
+
+
+angular.json
+
+"scripts": [
+  "node_modules/@agm/core/main.js",
+  "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"
+]
+
+
+ng generate component google-maps
+
+.html
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+
+
+.ts
+
+export class GoogleMapsComponent {
+  lat = 51.678418;
+  lng = 7.809007;
+  zoom = 10;
+}
+
+app.module.ts
+
+import { AgmCoreModule } from '@agm/core';
+
+
+imports: [
+  AgmCoreModule.forRoot({
+    apiKey: 'YOUR_API_KEY'
+  })
+]
+
+
+
